@@ -1,0 +1,49 @@
+<div id="content">
+	<h1>Choix de la mission</h1>
+	<p class="obj">Plusieurs choix s'offrent à vous : </p>
+	<form name="myForm">
+		<!-- <fieldset>
+		<legend>Mission CubeSat - Budget : 135 000€</legend>
+			<label for='cubesat'>Observation de la Terre 
+			<input type="radio" ng-model="mission" value="CubeSat" id="cubesat">
+			</label>
+		</fieldset> -->
+		<fieldset>
+		<legend>Petite mission - Budget : 100M€</legend>
+			<label for="petiteAst">Observation astronomique 
+			<input type="radio" ng-model="mission" value="petite-astro" id="petiteAst">
+			</label>
+			<label for="petiteTer">Observation de la Terre
+			<input type="radio" ng-model="mission" value="petite-terre" id="petiteTer">
+			</label>
+		</fieldset>
+		<fieldset>
+		<legend>Moyenne mission - Budget : 400M€</legend>
+			<label for="moyAst">Observation astronomique 
+			<input type="radio" ng-model="mission" value="moyenne-astro" id="moyAst">
+			</label>
+			<label for="moyTer">Observation d'une planète
+			<input type="radio" ng-model="mission" value="moyenne-terre" id="moyTer">
+			</label>
+			<label for="moyAtt">Atterrisseur
+			<input type="radio" ng-model="mission" value="moyenne-atterri" id="moyAtt">
+			</label>
+		</fieldset>
+		<fieldset>
+			<legend>Grande mission - Budget : 800M€</legend>
+			<label for="gdAst">Observation astronomique 
+			<input type="radio" ng-model="mission" value="grande-astro" id="gdAst">
+			</label>
+			<label for="gdTer">Observation d'une planète
+			<input type="radio" ng-model="mission" value="grande-terre" id="gdTer">
+			</label>
+			<label for="gdAtt">Atterrisseur
+			<input type="radio" ng-model="mission" value="grande-atterri" id="gdAtt">
+			</label>
+		</fieldset>
+	</form>
+	<nav>
+		<a href="#/jouer/{{mission}}" class="btn1">Jouer</a>
+		<a href="#" class="btn2">Revenir au menu principal</a>
+	</nav>
+</div>

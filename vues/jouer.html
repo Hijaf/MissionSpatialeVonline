@@ -1,0 +1,149 @@
+	<a  id="lancerM" ng-click="validerM()" href="">Vérifier la conception</a>
+	<div id="blocMoved">
+		<nav id="navJeu">
+			<a href="" ng-click="showRu=!showRu; show=!show" class="btn4">Règles</a>
+			<a href="" ng-click="showOb=!showOb; show=!show" class="btn5">Objectifs</a>
+			<a href="" ng-click="showPa=!showPa; show=!show" class="btn6">Panier</a>
+			<a href="" ng-click="showQu=!showQu; show=!show" class="btn7">Quitter</a>
+		</nav>
+		<div id="contentJeu">
+			<article class="typeMat" ng-repeat="element in selectedList" ng-hide="element.state">
+				<img src="{{element.img}}" alt="">
+				<div>
+					<h2>{{element.name}}</h2>
+					<p>
+						{{element.description}}
+					</p>
+					<p ng-show="element.rmq">
+						Remarques : {{element.rmq}}
+					</p>
+				</div>
+				<ul>
+					Caractéristiques:
+					<li>Numéro du matériel : <span ng-bind="element.id"></span></li>
+					<li>Coût (M€) : <span>{{element.carac.cout}}</span></li>
+					<li ng-show="element.carac.charge">Charge (Kg) : <span ng-bind="element.carac.charge[typeM]"></span></li>
+					<li ng-show="element.carac.masse">Masse (Kg) : <span ng-bind="element.carac.masse"></span></li>
+					<li ng-show="element.carac.pelec">Puissance Elec. (W) : <span ng-bind="element.carac.pelec[typeM]"></span></li>
+					<li ng-show="element.carac.conso">Conso. Elec. (W) : <span ng-bind="element.carac.conso"></span></li>
+					<li ng-show="element.carac.ptsc">Point Science : <span ng-bind="element.carac.ptsc"></span></li>
+					<a href="" ng-click="acheterMat(element.id,element.type)" class="achat">Acheter</a>
+				</ul>
+			</article>
+		</div>
+	</div>
+	<aside id="onglets">
+		<a href="" ng-click="selectionnerListe('lanceurs')" class="btn8">Lanceurs</a>
+		<a href="" ng-click="selectionnerListe('projets')" class="btn10">Projets</a>
+		<a href="" ng-click="selectionnerListe('segments')" class="btn9">Segments sol</a>
+		<a href="" ng-click="selectionnerListe('energies')" class="btn11">Energie</a>
+		<a href="" ng-click="selectionnerListe('structures')" class="btn8">Structures</a>
+		<a href="" ng-click="selectionnerListe('controles')"class="btn10">Contrôle Therm.</a>
+		<a href="" ng-click="selectionnerListe('commus')"class="btn9">Commu.</a>
+		<a href="" ng-click="selectionnerListe('centres')"class="btn11">Centre de commandes</a>
+		<a href="" ng-click="selectionnerListe('attitudes')"class="btn8">Attitudes</a>
+		<a href="" ng-click="selectionnerListe('propulsions')"class="btn10">Propulsions</a>
+		<a href="" ng-click="selectionnerListe('instrus')"class="btn9">Instru. scientifiques</a>
+		<a href="" ng-click="selectionnerListe('systemes')"class="btn11">Syst. pour atterrisseur</a>
+	</aside>
+	<div id="indicateur">
+		<div id="budget" class="indic">
+			<span class="label">Budget actuel(M€)&nbsp;:  {{newBudget}}</span>
+			<span class="indMin">0</span>
+			<span class="indMax">{{budget}}</span>
+		</div>
+		<div id="energie" class="indic">
+			<span class="label">Conso. élec. actu. (W)&nbsp;: {{newElec}}</span>
+			<span class="indMin">0</span>
+			<span class="indMax">{{elec}}</span>
+		</div>
+		<div id="charge" class="indic">
+			<span class="label">Charge actu. (Kg)&nbsp;: {{newCharge}}</span>
+			<span class="indMin">0</span>
+			<span class="indMax">{{charge}}</span>
+		</div>
+		<div id="ptsc">
+			<span class="label">Pt. Science&nbsp;: </span>
+			<span class="val">{{newPtsc}}</span>
+		</div>
+	</div>
+	
+	<div class="modal" ng-show="show" >
+		<div id="panier" ng-show="showPa">
+			<a href="" id="close" ng-click="showPa=!showPa; show=!show">X</a>
+			<h1>Panier</h1>
+			<div class="container">
+				<article class="typeMat" ng-repeat="article in panier">
+					<img src="{{article.img}}" alt="">
+					<div>
+						<h2>{{article.name}}</h2>
+						<p>
+							{{article.description}}
+						</p>
+						<p>
+							Remarques : 
+						</p>
+					</div>
+					<ul>
+						Caractéristiques:
+						<li>Id : <span ng-bind="article.id"></span></li>
+						<li>Coût : <span>{{article.carac.cout}} M€</span></li>
+						<li ng-show="article.carac.charge">Charge (Kg) : <span ng-bind="article.carac.charge[typeM]"></span></li>
+						<li ng-show="article.carac.masse">Masse (Kg) : <span ng-bind="article.carac.masse"></span></li>
+						<li ng-show="article.carac.pelec">Puissance Elec. (W) : <span ng-bind="article.carac.pelec[typeM]"></span></li>
+						<li ng-show="article.carac.conso">Conso. Elec. (W) : <span ng-bind="article.carac.conso"></span></li>
+						<li ng-show="article.carac.ptsc">Point Science : <span ng-bind="article.carac.ptsc"></span></li>
+						<a href="" ng-click="vendreMat(article.id, article.type)" class="vente">Vendre</a>
+					</ul>
+				</article>
+			</div>	
+		</div>
+		<div id="confirm" ng-show="showQu">
+			<h1>Êtes vous sûr de vouloir quitter la partie?</h1>
+			<a href="#">Oui</a><a href="" ng-click="showQu=!showQu; show=!show">Non</a>
+		</div>
+		<div id="rules" ng-show="showRu">
+			<a href="" id="close" ng-click="showRu=!showRu; show=!show">X</a>
+			<h1>Règles</h1>
+			<p class="regles">
+				Votre but : concevoir une mission spatiale avec le meilleur rendement scientifique !
+			</p class="regles">
+			<ul class="regles">Types de mission possibles :
+				<li>Petite mission autour de la Terre : budget de 100 M€</li>
+				<li>Mission de taille moyenne : budget de 400 M€</li>
+				<li>Grosse mission : budget de 800 M€</li>
+			</ul>
+			<p class="regles">
+				Les missions peuvent être « planétaires » (étude de la Terre, ou un autre astre du Système solaire), ou « observatoires » (étude des étoiles, galaxies, etc.).
+			</p>
+			<p class="regles">
+				Chaque sous-système (attitude, télécom,…) du vaisseau doit être construit grâce aux listes de matériel proposées.
+			</p>
+			<p class="regles">
+				Chaque élément d'une liste possède un prix (en millions d’euros, M€), une masse (en kg), une consommation électrique (en W), et le retour scientifique attendu (+1 ou plus) de chaque composant.
+			</p>
+			<p class="regles">
+				Les objectifs de la mission seront définis avant le lancement d'une partie dans la section "Objectifs".
+				C'est dans cette section que vous choisirez le type de mission que vous voulez effectuer. Les composants devront être choisis en conséquence.
+			</p>
+		</div>
+		<div id="objec" ng-show="showOb">
+			<a href="" id="close" ng-click="showOb=!showOb; show=!show">X</a>
+			<h1>Objectifs</h1>
+			<p> Vous retrouvez ici vos objectifs de conception en fonction du type de mission choisi</p>
+			<p> Aucun objectif défini pour le moment</p>
+		</div>
+	</div>
+	<div class="modal" ng-show="reussite">
+		<div id="reussi" ng-show="reussite">
+			<h1>Félicitations, vous avez réussi la conception de votre mission!</h1>
+			<p>Votre conception rapporte {{newPtsc}} points science</p>
+			<a href="#">Terminer la mission</a>
+		</div>
+	</div>
+	<div class="modal" ng-show="echec">
+		<div id="echoue" ng-show="echec">
+			<h1>Désolé, vous avez raté la conception de votre mission!</h1>
+			<a href="#">Terminer la mission</a><a href="" ng-click="echec=!echec">Reconcevoir la mission</a>
+		</div>
+	</div>

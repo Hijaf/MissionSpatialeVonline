@@ -1,0 +1,11 @@
+{
+	"budget":{"CubeSat": 135000,
+		"petite": 100,
+		"moyenne": 400,
+		"grande": 800
+	},
+	"obligation":{"astro":[13,18,28,35],
+		"terre":[13,18,28,35,36],
+		"atterri":[13,18,28,35]
+	}
+}
